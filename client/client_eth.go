@@ -298,3 +298,9 @@ func (c *RpcEthClient) FeeHistory(blockCount rpc.DecimalOrHex, lastBlock types.B
 	err = c.CallContext(context.Background(), &val, "eth_feeHistory", blockCount, lastBlock, rewardPercentiles)
 	return
 }
+
+// TraceTransaction returns the block trace by block number.
+func (c *RpcEthClient) TraceTransaction(blockHash common.Hash, opts interface{}) (val *types.TraceTransactionResult, err error) {
+	err = c.CallContext(context.Background(), &val, "debug_traceTransaction", blockHash, opts)
+	return
+}

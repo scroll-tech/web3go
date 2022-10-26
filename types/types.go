@@ -320,3 +320,21 @@ type FeeHistoryResult struct {
 	BaseFee      []*hexutil.Big   `json:"baseFeePerGas,omitempty"`
 	GasUsedRatio []float64        `json:"gasUsedRatio"`
 }
+
+type TraceTransactionResult struct {
+	Gas          uint64           `json:"gas,omitempty"`
+	ReturnValue  *string          `json:"returnValue"`
+	StructLogs   []TraceLog       `json:"structlogs,omitempty"`
+}
+
+type TraceLog struct {
+	Depth        uint64             `json:"depth"`
+	Error        *string            `json:"error"`
+	Gas          uint64             `json:"gas"`
+	GasCost      uint64             `json:"gasCost"`
+	Memory       []*string          `json:"memory"`
+	Op           *string            `json:"op"`
+	Pc           uint64             `json:"pc"`
+	Stack        []*string          `json:"stack"`
+	Storage      map[string]string  `json:"storage"`
+}
