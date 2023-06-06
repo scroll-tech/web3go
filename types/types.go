@@ -181,7 +181,7 @@ type Receipt struct {
 	// Not guarantee to be valid, it's valid for some evm compatiable chains, such as conflux chain
 	TxExecErrorMsg    *string         `json:"txExecErrorMsg,omitempty" testomit:"false"`
 	Type              *uint           `json:"type,omitempty"`
-	L1Fee             *big.Int        `json:"l1Fee"`
+	L1Fee             *big.Int        `json:"l1Fee,omitempty"`
 }
 type receiptMarshaling struct {
 	BlockHash         common.Hash     `json:"blockHash"`

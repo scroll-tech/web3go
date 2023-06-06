@@ -30,9 +30,9 @@ func (r Receipt) MarshalJSON() ([]byte, error) {
 		To                *common.Address `json:"to"`
 		TransactionHash   common.Hash     `json:"transactionHash"`
 		TransactionIndex  hexutil.Uint64  `json:"transactionIndex"`
-		TxExecErrorMsg    *string         `json:"txExecErrorMsg,omitempty"        testomit:"false"`
+		TxExecErrorMsg    *string         `json:"txExecErrorMsg,omitempty" testomit:"false"`
 		Type              *hexutil.Uint   `json:"type,omitempty"`
-		L1Fee             *hexutil.Big    `json:"l1Fee"`
+		L1Fee             *hexutil.Big    `json:"l1Fee,omitempty"`
 	}
 	var enc Receipt
 	enc.BlockHash = r.BlockHash
@@ -72,9 +72,9 @@ func (r *Receipt) UnmarshalJSON(input []byte) error {
 		To                *common.Address `json:"to"`
 		TransactionHash   *common.Hash    `json:"transactionHash"`
 		TransactionIndex  *hexutil.Uint64 `json:"transactionIndex"`
-		TxExecErrorMsg    *string         `json:"txExecErrorMsg,omitempty"        testomit:"false"`
+		TxExecErrorMsg    *string         `json:"txExecErrorMsg,omitempty" testomit:"false"`
 		Type              *hexutil.Uint   `json:"type,omitempty"`
-		L1Fee             *hexutil.Big    `json:"l1Fee"`
+		L1Fee             *hexutil.Big    `json:"l1Fee,omitempty"`
 	}
 	var dec Receipt
 	if err := json.Unmarshal(input, &dec); err != nil {
