@@ -179,9 +179,9 @@ type Receipt struct {
 	TransactionHash   common.Hash     `json:"transactionHash"`
 	TransactionIndex  uint64          `json:"transactionIndex"`
 	// Not guarantee to be valid, it's valid for some evm compatiable chains, such as conflux chain
-	TxExecErrorMsg *string `json:"txExecErrorMsg,omitempty"        testomit:"false"`
-	Type           *uint   `json:"type,omitempty"`
-	L1Fee 			*big.Int `json:"l1Fee"`
+	TxExecErrorMsg    *string         `json:"txExecErrorMsg,omitempty" testomit:"false"`
+	Type              *uint           `json:"type,omitempty"`
+	L1Fee             *big.Int        `json:"l1Fee"`
 }
 type receiptMarshaling struct {
 	BlockHash         common.Hash     `json:"blockHash"`
@@ -200,7 +200,7 @@ type receiptMarshaling struct {
 	TransactionIndex  hexutil.Uint64  `json:"transactionIndex"`
 	TxExecErrorMsg    *string         `json:"txExecErrorMsg"`
 	Type              *hexutil.Uint   `json:"type,omitempty"`
-	L1Fee			  *hexutil.Big  `json:"l1Fee,omitempty"`
+	L1Fee             *hexutil.Big    `json:"l1Fee,omitempty"`
 }
 
 //go:generate gencodec -type CallRequest -field-override callRequestMarshaling -out gen_call_request_json.go
