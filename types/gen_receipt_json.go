@@ -4,6 +4,7 @@ package types
 
 import (
 	"encoding/json"
+	"math/big"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
@@ -29,9 +30,9 @@ func (r Receipt) MarshalJSON() ([]byte, error) {
 		To                *common.Address `json:"to"`
 		TransactionHash   common.Hash     `json:"transactionHash"`
 		TransactionIndex  hexutil.Uint64  `json:"transactionIndex"`
-		TxExecErrorMsg    *string         `json:"txExecErrorMsg,omitempty"        testomit:"false"`
+		TxExecErrorMsg    *string         `json:"txExecErrorMsg,omitempty" testomit:"false"`
 		Type              *hexutil.Uint   `json:"type,omitempty"`
-		L1Fee             hexutil.Uint64  `json:"l1Fee,omitempty"`
+		L1Fee             *hexutil.Big    `json:"l1Fee,omitempty"`
 	}
 	var enc Receipt
 	enc.BlockHash = r.BlockHash
@@ -50,7 +51,7 @@ func (r Receipt) MarshalJSON() ([]byte, error) {
 	enc.TransactionIndex = hexutil.Uint64(r.TransactionIndex)
 	enc.TxExecErrorMsg = r.TxExecErrorMsg
 	enc.Type = (*hexutil.Uint)(r.Type)
-	enc.L1Fee = hexutil.Uint64(r.L1Fee)
+	enc.L1Fee = (*hexutil.Big)(r.L1Fee)
 	return json.Marshal(&enc)
 }
 
@@ -71,9 +72,9 @@ func (r *Receipt) UnmarshalJSON(input []byte) error {
 		To                *common.Address `json:"to"`
 		TransactionHash   *common.Hash    `json:"transactionHash"`
 		TransactionIndex  *hexutil.Uint64 `json:"transactionIndex"`
-		TxExecErrorMsg    *string         `json:"txExecErrorMsg,omitempty"        testomit:"false"`
+		TxExecErrorMsg    *string         `json:"txExecErrorMsg,omitempty" testomit:"false"`
 		Type              *hexutil.Uint   `json:"type,omitempty"`
-		L1Fee             *hexutil.Uint64 `json:"l1Fee,omitempty"`
+		L1Fee             *hexutil.Big    `json:"l1Fee,omitempty"`
 	}
 	var dec Receipt
 	if err := json.Unmarshal(input, &dec); err != nil {
@@ -128,7 +129,7 @@ func (r *Receipt) UnmarshalJSON(input []byte) error {
 		r.Type = (*uint)(dec.Type)
 	}
 	if dec.L1Fee != nil {
-		r.L1Fee = uint64(*dec.L1Fee)
+		r.L1Fee = (*big.Int)(dec.L1Fee)
 	}
 	return nil
 }
