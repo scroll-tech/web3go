@@ -301,6 +301,6 @@ func (c *RpcEthClient) FeeHistory(blockCount rpc.DecimalOrHex, lastBlock types.B
 
 /// GetProof returns the Merkle-proof for a given account and optionally some storage keys.
 func (c *RpcEthClient) GetProof(addr common.Address, storageKeys []string, blockNrOrHash *types.BlockNumberOrHash) (val *types.AccountResult, err error) {
-	err = c.CallContext(context.Background(), &val, "eth_getProof", addr, storageKeys, blockNrOrHash)
+	err = c.CallContext(context.Background(), &val, "eth_getProof", addr, storageKeys, getRealBlockNumberOrHash(blockNrOrHash))
 	return
 }
