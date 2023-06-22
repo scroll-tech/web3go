@@ -322,3 +322,20 @@ type FeeHistoryResult struct {
 	BaseFee      []*hexutil.Big   `json:"baseFeePerGas,omitempty"`
 	GasUsedRatio []float64        `json:"gasUsedRatio"`
 }
+type AccountResult struct {
+	Address          common.Address  `json:"address"`
+	AccountProof     []string        `json:"accountProof"`
+	Balance          *hexutil.Big    `json:"balance"`
+	PoseidonCodeHash common.Hash     `json:"poseidonCodeHash"`
+	KeccakCodeHash   common.Hash     `json:"keccakCodeHash"`
+	CodeSize         hexutil.Uint64  `json:"codeSize"`
+	Nonce            hexutil.Uint64  `json:"nonce"`
+	StorageHash      common.Hash     `json:"storageHash"`
+	StorageProof     []StorageResult `json:"storageProof"`
+}
+
+type StorageResult struct {
+	Key   string       `json:"key"`
+	Value *hexutil.Big `json:"value"`
+	Proof []string     `json:"proof"`
+}
