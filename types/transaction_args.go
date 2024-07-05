@@ -157,6 +157,7 @@ func (args *TransactionArgs) Populate(reader ReaderForPopulate) error {
 			MaxPriorityFeePerGas: (*big.Int)(args.MaxPriorityFeePerGas),
 			Value:                (*big.Int)(args.Value),
 			Data:                 data,
+			Input:                data,
 			AccessList:           args.AccessList,
 		}
 
