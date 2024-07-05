@@ -186,6 +186,7 @@ func convertCallMsg2CallRequest(call ethereum.CallMsg) types.CallRequest {
 		MaxPriorityFeePerGas: call.GasTipCap,
 		Value:                call.Value,
 		Data:                 call.Data,
+		Input:                call.Data,
 	}
 
 	if call.From != (common.Address{}) {

@@ -101,8 +101,9 @@ type blockMarshaling struct {
 	// SealFields       []hexutil.Bytes         `json:"sealFields"` //+ ?
 }
 
-//go:generate gencodec -type PlainTransaction -field-override plainTransactionMarshaling -out gen_plain_transaction_json.go
 // "testomit" tag is used to omit the field in rpc test, omit when testomit is true and un-omit when testomit is false.
+//
+//go:generate gencodec -type PlainTransaction -field-override plainTransactionMarshaling -out gen_plain_transaction_json.go
 type TransactionDetail struct {
 	Accesses    types.AccessList `json:"accessList,omitempty"`
 	BlockHash   *common.Hash     `json:"blockHash"`
@@ -161,8 +162,9 @@ type plainTransactionMarshaling struct {
 	Value                *hexutil.Big     `json:"value"`
 }
 
-//go:generate gencodec -type Receipt -field-override receiptMarshaling -out gen_receipt_json.go
 // "testomit" tag is used to omit the field in rpc test, omit when testomit is true and un-omit when testomit is false.
+//
+//go:generate gencodec -type Receipt -field-override receiptMarshaling -out gen_receipt_json.go
 type Receipt struct {
 	BlockHash         common.Hash     `json:"blockHash"`
 	BlockNumber       uint64          `json:"blockNumber"`
@@ -179,9 +181,9 @@ type Receipt struct {
 	TransactionHash   common.Hash     `json:"transactionHash"`
 	TransactionIndex  uint64          `json:"transactionIndex"`
 	// Not guarantee to be valid, it's valid for some evm compatiable chains, such as conflux chain
-	TxExecErrorMsg    *string         `json:"txExecErrorMsg,omitempty" testomit:"false"`
-	Type              *uint           `json:"type,omitempty"`
-	L1Fee             *big.Int        `json:"l1Fee,omitempty"`
+	TxExecErrorMsg *string  `json:"txExecErrorMsg,omitempty" testomit:"false"`
+	Type           *uint    `json:"type,omitempty"`
+	L1Fee          *big.Int `json:"l1Fee,omitempty"`
 }
 type receiptMarshaling struct {
 	BlockHash         common.Hash     `json:"blockHash"`
@@ -203,9 +205,10 @@ type receiptMarshaling struct {
 	L1Fee             *hexutil.Big    `json:"l1Fee,omitempty"`
 }
 
-//go:generate gencodec -type CallRequest -field-override callRequestMarshaling -out gen_call_request_json.go
 // CallRequest represents the arguments to construct a new transaction
 // or a message call.
+//
+//go:generate gencodec -type CallRequest -field-override callRequestMarshaling -out gen_call_request_json.go
 type CallRequest struct {
 	From                 *common.Address `json:"from,omitempty"`
 	To                   *common.Address `json:"to,omitempty"`
@@ -216,7 +219,8 @@ type CallRequest struct {
 	Value                *big.Int        `json:"value,omitempty"`
 	Nonce                *uint64         `json:"nonce,omitempty"`
 
-	Data []byte `json:"data,omitempty"`
+	Data  []byte `json:"data,omitempty"`
+	Input []byte `json:"input,omitempty"`
 
 	// Introduced by AccessListTxType transaction.
 	AccessList *types.AccessList `json:"accessList,omitempty"`
